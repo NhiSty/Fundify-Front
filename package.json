@@ -5,13 +5,24 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint fundify-backoffice --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src"
   },
   "dependencies": {
-    "vue": "^3.3.4"
+    "@mdi/font": "^7.2.96",
+    "pinia": "^2.1.3",
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.2",
+    "vuetify": "^3.3.8"
   },
   "devDependencies": {
+    "@rushstack/eslint-patch": "^1.2.0",
     "@vitejs/plugin-vue": "^4.2.3",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "eslint": "^8.39.0",
+    "eslint-plugin-vue": "^9.11.0",
+    "prettier": "^2.8.8",
     "vite": "^4.3.9"
   }
 }
