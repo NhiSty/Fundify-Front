@@ -1,5 +1,7 @@
+import {Endpoint} from "@/api/endpoint";
+
 export class Facade {
-  baseApiUrl = 'http://localhost:1337';
+  baseApiUrl = 'http://localhost:1337/api';
   static instance;
   constructor() {}
 
@@ -11,24 +13,40 @@ export class Facade {
     return Facade.instance;
   }
 
+  // Permet d'ajouter un nouveau marchand
   async submitMerchant(formData) {
-    console.log('formData', formData)
-    return fetch(`${this.baseApiUrl}/api/auth/merchant/signup`, {
+    const url = this.baseApiUrl + Endpoint.authMerchantSignup;
+    return fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        email: formData.email,
+        contactEmail: formData.contactEmail,
         password: formData.password,
-        lastname: formData.lastname,
-        firstname: formData.firstname,
-        society: formData.society,
+        contactLastName: formData.contactLastName,
+        contactFirstName: formData.contactFirstName,
+        companyName: formData.companyName,
         kbis: formData.kbis,
-        phone: formData.phone,
+        contactPhone: formData.contactPhone,
         currency: formData.currency,
-        rejectUrl: formData.rejectUrl,
-        confirmationUrl: formData.confirmationUrl,
+        confirmationRedirectUrl: formData.confirmationRedirectUrl,
+        cancellationRedirectUrl: formData.cancellationRedirectUrl,
+      }),
+    });
+  }
+
+  // Se connecter à son espace marchand
+  async loginMerchant(formData) {
+    const url = this.baseApiUrl + Endpoint.authMerchantLogin;
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        contactEmail: formData.email,
+        password: formData.password,
       }),
     });
   }
