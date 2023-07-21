@@ -7,7 +7,7 @@ onBeforeMount(() => {
   if (localStorage.getItem('fundify-token')) {
 
   }
-}
+});
 
 const formData = reactive({
   email: '',
