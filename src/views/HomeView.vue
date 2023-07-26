@@ -7,7 +7,7 @@ const amount = ref('');
 
 // On submit, make a post request to the server
 const submit = async () => {
-  const response = await fetch('http://localhost:3000/api/checkout', {
+  const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/checkout`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
