@@ -5,36 +5,43 @@ const id = ref('');
 const clientToken = ref('');
 const amount = ref('');
 
-const output = ref('');
+const setCookie = (name, value, min) => {
+  const expirationDate = new Date();
+  expirationDate.setTime(expirationDate.getTime() + min * 60 * 1000);
+  const cookieValue = encodeURIComponent(value) + (min ? `; expires=${expirationDate.toUTCString()}` : '');
+  document.cookie = `${name}=${cookieValue}; path=/; secure; SameSite=strict`;
+};
+
 
 // On submit, make a post request to the server
 const submit = async () => {
-  console.log(`Authorization : Bearer ${id.value}:${clientToken.value}`);
   try {
     const response = await fetch(`${import.meta.env.VITE_SERVER_URL}/api/transactions`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Bearer': `${id.value}:${clientToken.value}`,
+        'credentials': 'include',
       },
       body: JSON.stringify({
         id: id.value,
         merchantId: id.value,
         amount: amount.value,
-        userId: 1,
+        userId: "e6c834bc-2597-4689-866e-85bd687ef13f",
         currency: 'USD',
       }),
     });
-    console.log(response.status);
     const data = await response.json();
-    console.log(data); 
-    output.value = data;
+    console.log(data);
+    setCookie('clientSecret', data.clientSecret, 60 );
+
+    if (document.cookie.indexOf('clientSecret') === -1) {
+    }else{
+      window.location.href = data.url
+    }
+
   } catch (error) {
-    output.value = error;
-    console.error(error);
-    console.log(id.value);
-    console.log(clientToken.value);
-    console.log(amount.value);
+    console.log(error);
   }
 };
 
@@ -71,6 +78,8 @@ const submit = async () => {
         Submit
       </v-btn>
     </v-form>
-    <p>{{ output }}</p>
+
+    id :839aa47c-444c-4af6-a31b-4e81b75bf834 <br>
+    token :u5MRWqCBaTGmSIXHqqFmR0f1jj0u1qMXVVDFCwV8xlvaoTZBZtXjXHYNTHpyCbTaGwh4+128AomFNyaFKEOMgw==
   </main>
 </template>
