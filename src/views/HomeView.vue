@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 
-const id = ref('');
-const clientToken = ref('');
+const id = ref('91fda44c-24ab-4b6e-bdee-c58f16d46e70');
+const clientToken = ref('1FUBIiSKD1MOfwa7JosooVO1maUz0PfFODkaAw1mg1ob6O9/fDpRZed0UsbpXr986LQJWpFpxl4pqwK8V/JzZg==');
 const amount = ref('');
 
 const setCookie = (name, value, min) => {
@@ -20,8 +20,7 @@ const submit = async () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Bearer': `${id.value}:${clientToken.value}`,
-        'credentials': 'include',
+        Authorization: `Bearer ${id.value}:${clientToken.value}`,
       },
       body: JSON.stringify({
         id: id.value,
@@ -32,7 +31,6 @@ const submit = async () => {
       }),
     });
     const data = await response.json();
-    console.log(data);
     setCookie('clientSecret', data.clientSecret, 60 );
 
     if (document.cookie.indexOf('clientSecret') === -1) {
@@ -61,7 +59,6 @@ const submit = async () => {
         v-model="clientToken"
         label="Client Token"
         type="textarea"
-        placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNkODA0N2I5LTljYzEtNDA3YS04NjFhLWJkMWI0ODU5NWI1ZCIsIm1lcmNoYW50SWQiOiI4NDE5NjkzMC03N2RjLTQ5MjYtYmM5NC0xMThhNzQ2MTI3OTAiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjkwNDk2MDAxLCJleHAiOjE3MjIwNTM2MDF9.6tA1UK7kfVzV5l8jxiRUTbj_IPeIQSuaFChu6sbC8lg"
         required
       ></v-text-field>
       <v-text-field
@@ -78,8 +75,5 @@ const submit = async () => {
         Submit
       </v-btn>
     </v-form>
-
-    id :839aa47c-444c-4af6-a31b-4e81b75bf834 <br>
-    token :u5MRWqCBaTGmSIXHqqFmR0f1jj0u1qMXVVDFCwV8xlvaoTZBZtXjXHYNTHpyCbTaGwh4+128AomFNyaFKEOMgw==
   </main>
 </template>
