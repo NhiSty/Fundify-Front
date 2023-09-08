@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 
-const id = ref('91fda44c-24ab-4b6e-bdee-c58f16d46e70');
-const clientToken = ref('1FUBIiSKD1MOfwa7JosooVO1maUz0PfFODkaAw1mg1ob6O9/fDpRZed0UsbpXr986LQJWpFpxl4pqwK8V/JzZg==');
+const id = ref('');
+const clientToken = ref('');
 const amount = ref('');
 
 const setCookie = (name, value, min) => {
