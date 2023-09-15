@@ -18,6 +18,9 @@ import "vue-toastification/dist/index.css";
 
 const app = createApp(App)
 const vuetify = createVuetify({
+    icons: {
+        defaultSet: 'mdi',
+    },
     components,
     directives,
 });
